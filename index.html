@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/CountyBoundary_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-4.117798039836374,39.43043837900155],[-3.834640079129067,39.95201744788806]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleTerrainHybrid_0');
+        map.getPane('pane_GoogleTerrainHybrid_0').style.zIndex = 400;
+        var layer_GoogleTerrainHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleTerrainHybrid_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+        });
+        layer_GoogleTerrainHybrid_0;
+        map.addLayer(layer_GoogleTerrainHybrid_0);
+        function pop_CountyBoundary_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA'] !== null ? autolinker.link(feature.properties['AREA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PERIMETER'] !== null ? autolinker.link(feature.properties['PERIMETER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COUNTY3_'] !== null ? autolinker.link(feature.properties['COUNTY3_'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COUNTY3_ID'] !== null ? autolinker.link(feature.properties['COUNTY3_ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COUNTY'] !== null ? autolinker.link(feature.properties['COUNTY'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CountyBoundary_1_0() {
+            return {
+                pane: 'pane_CountyBoundary_1',
+                opacity: 1,
+                color: 'rgba(72,72,72,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,113,72,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_CountyBoundary_1');
+        map.getPane('pane_CountyBoundary_1').style.zIndex = 401;
+        map.getPane('pane_CountyBoundary_1').style['mix-blend-mode'] = 'normal';
+        var layer_CountyBoundary_1 = new L.geoJson(json_CountyBoundary_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_CountyBoundary_1',
+            layerName: 'layer_CountyBoundary_1',
+            pane: 'pane_CountyBoundary_1',
+            onEachFeature: pop_CountyBoundary_1,
+            style: style_CountyBoundary_1_0,
+        });
+        bounds_group.addLayer(layer_CountyBoundary_1);
+        map.addLayer(layer_CountyBoundary_1);
+        map.createPane('pane_MombasaMangrove2021Baseline_2');
+        map.getPane('pane_MombasaMangrove2021Baseline_2').style.zIndex = 402;
+        var img_MombasaMangrove2021Baseline_2 = 'data/MombasaMangrove2021Baseline_2.png';
+        var img_bounds_MombasaMangrove2021Baseline_2 = [[-4.1547980205811985,39.56315258554991],[-3.918720763914589,39.76365655696539]];
+        var layer_MombasaMangrove2021Baseline_2 = new L.imageOverlay(img_MombasaMangrove2021Baseline_2,
+                                              img_bounds_MombasaMangrove2021Baseline_2,
+                                              {pane: 'pane_MombasaMangrove2021Baseline_2'});
+        bounds_group.addLayer(layer_MombasaMangrove2021Baseline_2);
+        map.addLayer(layer_MombasaMangrove2021Baseline_2);
+        map.createPane('pane_MombasaMangroveChange20012021_3');
+        map.getPane('pane_MombasaMangroveChange20012021_3').style.zIndex = 403;
+        var img_MombasaMangroveChange20012021_3 = 'data/MombasaMangroveChange20012021_3.png';
+        var img_bounds_MombasaMangroveChange20012021_3 = [[-4.1547980205811985,39.56315258554991],[-3.918720763914589,39.76365655696539]];
+        var layer_MombasaMangroveChange20012021_3 = new L.imageOverlay(img_MombasaMangroveChange20012021_3,
+                                              img_bounds_MombasaMangroveChange20012021_3,
+                                              {pane: 'pane_MombasaMangroveChange20012021_3'});
+        bounds_group.addLayer(layer_MombasaMangroveChange20012021_3);
+        map.addLayer(layer_MombasaMangroveChange20012021_3);
+        map.createPane('pane_TanaRiverMangrove2021Baseline_4');
+        map.getPane('pane_TanaRiverMangrove2021Baseline_4').style.zIndex = 404;
+        var img_TanaRiverMangrove2021Baseline_4 = 'data/TanaRiverMangrove2021Baseline_4.png';
+        var img_bounds_TanaRiverMangrove2021Baseline_4 = [[-3.072777260859236,38.43423976799691],[-0.015630685943679667,40.730603128791635]];
+        var layer_TanaRiverMangrove2021Baseline_4 = new L.imageOverlay(img_TanaRiverMangrove2021Baseline_4,
+                                              img_bounds_TanaRiverMangrove2021Baseline_4,
+                                              {pane: 'pane_TanaRiverMangrove2021Baseline_4'});
+        bounds_group.addLayer(layer_TanaRiverMangrove2021Baseline_4);
+        map.addLayer(layer_TanaRiverMangrove2021Baseline_4);
+        map.createPane('pane_TanaRiverMangroveChange20012021_5');
+        map.getPane('pane_TanaRiverMangroveChange20012021_5').style.zIndex = 405;
+        var img_TanaRiverMangroveChange20012021_5 = 'data/TanaRiverMangroveChange20012021_5.png';
+        var img_bounds_TanaRiverMangroveChange20012021_5 = [[-3.0727772608592296,38.43423976799691],[-0.015630685943679445,40.730603128791635]];
+        var layer_TanaRiverMangroveChange20012021_5 = new L.imageOverlay(img_TanaRiverMangroveChange20012021_5,
+                                              img_bounds_TanaRiverMangroveChange20012021_5,
+                                              {pane: 'pane_TanaRiverMangroveChange20012021_5'});
+        bounds_group.addLayer(layer_TanaRiverMangroveChange20012021_5);
+        map.addLayer(layer_TanaRiverMangroveChange20012021_5);
+        map.createPane('pane_LamuMangrove2021Baseline_6');
+        map.getPane('pane_LamuMangrove2021Baseline_6').style.zIndex = 406;
+        var img_LamuMangrove2021Baseline_6 = 'data/LamuMangrove2021Baseline_6.png';
+        var img_bounds_LamuMangrove2021Baseline_6 = [[-2.467761917004738,40.20805312801931],[-1.6587391721266966,41.61185042251289]];
+        var layer_LamuMangrove2021Baseline_6 = new L.imageOverlay(img_LamuMangrove2021Baseline_6,
+                                              img_bounds_LamuMangrove2021Baseline_6,
+                                              {pane: 'pane_LamuMangrove2021Baseline_6'});
+        bounds_group.addLayer(layer_LamuMangrove2021Baseline_6);
+        map.addLayer(layer_LamuMangrove2021Baseline_6);
+        map.createPane('pane_LamuMangroveChange20012021_7');
+        map.getPane('pane_LamuMangroveChange20012021_7').style.zIndex = 407;
+        var img_LamuMangroveChange20012021_7 = 'data/LamuMangroveChange20012021_7.png';
+        var img_bounds_LamuMangroveChange20012021_7 = [[-2.467761917004738,40.20805312801931],[-1.6587391721266966,41.61185042251289]];
+        var layer_LamuMangroveChange20012021_7 = new L.imageOverlay(img_LamuMangroveChange20012021_7,
+                                              img_bounds_LamuMangroveChange20012021_7,
+                                              {pane: 'pane_LamuMangroveChange20012021_7'});
+        bounds_group.addLayer(layer_LamuMangroveChange20012021_7);
+        map.addLayer(layer_LamuMangroveChange20012021_7);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{"Lamu Mangrove Change (2001-2021)": layer_LamuMangroveChange20012021_7,"Lamu Mangrove 2021 (Baseline)": layer_LamuMangrove2021Baseline_6,"Tana River Mangrove Change (2001-2021)": layer_TanaRiverMangroveChange20012021_5,"Tana River Mangrove 2021 (Baseline)": layer_TanaRiverMangrove2021Baseline_4,"Mombasa Mangrove Change (2001-2021)": layer_MombasaMangroveChange20012021_3,"Mombasa Mangrove 2021 (Baseline)": layer_MombasaMangrove2021Baseline_2,'<img src="legend/CountyBoundary_1.png" /> County Boundary': layer_CountyBoundary_1,"Google Terrain Hybrid": layer_GoogleTerrainHybrid_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        </script>
+    </body>
+</html>
